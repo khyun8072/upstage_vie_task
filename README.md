@@ -22,6 +22,25 @@ OCR 데이터와 문서 이미지를 다루는 첫 경험이었습니다. 기존
 
 ---
 
+### 데이터 준비
+
+SROIE 데이터셋을 `data/` 폴더에 다운로드해야 합니다.
+
+```
+data/
+├── train/
+│   ├── img/          # 학습 이미지
+│   └── entities/     # 학습 라벨 (JSON)
+├── test/
+│   ├── img/          # 테스트 이미지
+│   └── entities/     # 테스트 라벨 (JSON)
+├── labels.txt        # 라벨 정의 (S-COMPANY, S-DATE, S-ADDRESS, S-TOTAL, O)
+├── train.txt         # 학습 데이터 (텍스트 + bbox)
+├── test.txt          # 테스트 데이터
+└── op_test.txt       # 평가용 테스트 데이터
+```
+
+
 ## 문제 해결 과정
 
 ### 1단계: Baseline 확인
@@ -194,36 +213,6 @@ v1(84%)에 비해 v3(33%)가 훨씬 낮게 나왔습니다.
 ```bash
 bash scripts/run.sh --model layoutlmv3
 bash scripts/run.sh --model layoutlmv3 --freeze-visual
-```
-
----
-
-## 실행 방법
-
-### 데이터 준비
-
-SROIE 데이터셋을 `data/` 폴더에 다운로드해야 합니다.
-
-```
-data/
-├── train/
-│   ├── img/          # 학습 이미지
-│   └── entities/     # 학습 라벨 (JSON)
-├── test/
-│   ├── img/          # 테스트 이미지
-│   └── entities/     # 테스트 라벨 (JSON)
-├── labels.txt        # 라벨 정의 (S-COMPANY, S-DATE, S-ADDRESS, S-TOTAL, O)
-├── train.txt         # 학습 데이터 (텍스트 + bbox)
-├── test.txt          # 테스트 데이터
-└── op_test.txt       # 평가용 테스트 데이터
-```
-
-### 학습 및 평가
-
-```bash
-bash scripts/run.sh --help                        # 도움말
-bash scripts/run.sh                               # Baseline
-bash scripts/run.sh --loss focal --class-weights  # 최종 모델
 ```
 
 ---
